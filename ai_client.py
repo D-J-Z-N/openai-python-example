@@ -17,22 +17,22 @@ class CustomOpenAIClient():
 
         self.messages = [
             {
-                "role": "user",
-                "content": "What is the capital of France?",
+                "role": "system",
+                "content": "You are a helpful assistant. Only respond in Lithuanian",
             }
         ]
 
     def send_message(self, user_input):
+        # appends messages for context
         self.messages.append({"role": "user", "content": user_input})
         response = self.client.chat.completions.create(
             messages=self.messages,
-            model=self.model
+            model=self.model,
             max_tokens=150,
-            n=1,
-            stop=None,
-            temperature=1.0,
+            temperature=0.7,
             top_p=1.0
         )
+
         reply = response.choices[0].message.content
         self.messages.append({"role": "assistant", "content": reply})
         return reply

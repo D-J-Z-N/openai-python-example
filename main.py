@@ -9,17 +9,16 @@ def main():
     ai = CustomOpenAIClient()
 
     console.print(
-        "[bold purple]Hello, this is example of the AI client.[/bold purple]")
+        "[bold purple]Hello, this is example of the AI client, that responds in Lithuanian.[/bold purple]")
     console.print(
         "[bold blue]You can chat with the AI model or type 'exit' to quit.[/bold blue]")
-
 
 
     while True:
         user_input = console.input("[bold green]You: [/bold green]")
 
-        if user_input.lower() in ["exit", "quit"]:
-            console.print("[bold purple] Goodbye![/bold purple]")
+        if user_input.strip().lower() in ["exit"]:
+            console.print("[bold purple]Goodbye![/bold purple]")
             break
 
         try:
@@ -31,5 +30,5 @@ def main():
                 f"[bold red]Error: {e}[/bold red]")
             continue
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
