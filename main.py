@@ -1,32 +1,35 @@
-import os
-from openai import OpenAI
-from dotenv import load_dotenv
+from ai_client import CustomOpenAIClient
+from rich.console import Console
 
-load_dotenv()
+console = Console()
 
-token = os.environ["GITHUB_TOKEN"]
-endpoint = "https://models.github.ai/inference"
-model = "openai/gpt-4.1-nano"
 
-client = OpenAI(
-    base_url=endpoint,
-    api_key=token,
-)
+def main():
 
-response = client.chat.completions.create(
-    messages=[
-        {
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "role": "user",
-            "content": "What is the capital of France?",
-        }
-    ],
-    temperature=1.0,
-    top_p=1.0,
-    model=model
-)
+    ai = CustomOpenAIClient()
 
-print(response.choices[0].message.content)
+    console.print(
+        "[bold purple]Hello, this is example of the AI client.[/bold purple]")
+    console.print(
+        "[bold blue]You can chat with the AI model or type 'exit' to quit.[/bold blue]")
+
+
+
+    while True:
+        user_input = console.input("[bold green]You: [/bold green]")
+
+        if user_input.lower() in ["exit", "quit"]:
+            console.print("[bold purple] Goodbye![/bold purple]")
+            break
+
+        try:
+            response = ai.send_message(user_input)
+            console.print(f"[bold yellow]AI:[/bold yellow] {response}")
+
+        except Exception as e:
+            console.print(
+                f"[bold red]Error: {e}[/bold red]")
+            continue
+
+    if __name__ == "__main__":
+        main()
