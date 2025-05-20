@@ -1,2 +1,2 @@
-# python-openai-client
+# openai-python-example
 OpenAI Python API library demo
