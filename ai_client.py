@@ -23,7 +23,6 @@ class CustomOpenAIClient():
         ]
 
     def send_message(self, user_input):
-        # appends messages for context
         self.messages.append({"role": "user", "content": user_input})
         response = self.client.chat.completions.create(
             messages=self.messages,

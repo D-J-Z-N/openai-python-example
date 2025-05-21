@@ -16,7 +16,6 @@ def main():
 
     while True:
         user_input = console.input("[bold green]You: [/bold green]")
-
         if user_input.strip().lower() in ["exit"]:
             console.print("[bold purple]Goodbye![/bold purple]")
             break
